@@ -62,11 +62,11 @@ const Dashboard = () => {
 
   return (
     <LinearGradientWrapper>
-        <View flex paddingT-20 center>
+      <View flex paddingT-20 center paddingH-4>
         <View  marginB-40>
         <Text className="text-black text-2xl font-semibold">How to request help</Text>
-      </View>
-      <View>
+        </View>
+      <View className=''>
         <Carousel
           key={'carousel'}
           ref={carousel}
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: pageHeight,
     width: Constants.windowWidth,
-    borderRadius: 20
+    borderRadius: 10
   },
   pageText: {
     fontSize: 30,
