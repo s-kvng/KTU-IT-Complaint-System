@@ -6,6 +6,7 @@ import { Button, Colors, Picker, Text as TextUi } from 'react-native-ui-lib';
 import { longOptions } from '@/constants';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { Bounceable } from 'rn-bounceable';
+import { router } from 'expo-router';
 
 const AddComplaint = () => {
   const [text, setText] = React.useState<string | undefined >(undefined);
