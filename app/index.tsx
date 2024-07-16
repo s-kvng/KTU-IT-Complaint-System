@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View , Text, Image, ScrollView} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import { router } from 'expo-router';
 import {images} from "../constants"
 import { Button } from 'react-native-ui-lib';
 import { Bounceable } from 'rn-bounceable';
@@ -30,7 +30,9 @@ const App = () => {
                     </View>
                     <View className=' absolute bottom-20'>
                         <Bounceable>
-                            <Button enableShadow backgroundColor="#D9D9D9">
+                            <Button enableShadow backgroundColor="#D9D9D9"
+                                    onPress={()=> router.push("/sign-in") }
+                            >
                                 <Text className=' mr-5 text-[#0B4479] font-semibold text-lg'>Get Started</Text>
                                 <AntDesign name="rightcircle" size={24} color="#0B4479" />
                             </Button>
