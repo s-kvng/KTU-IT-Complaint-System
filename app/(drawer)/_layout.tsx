@@ -100,12 +100,12 @@ const CustomDrawerContent = (props: any) => {
         icon={({ color, size, focused})=>(
           <MaterialCommunityIcons name="human-greeting-variant" 
                 size={24} 
-                color={getIconColor('/(admin)/admin-dashboard')} />
+                color={getIconColor('/admin-dashboard')} />
         )}
         label={"Dashboard"}
-        labelStyle={[styles.navItemLabel, {color : getLabelColor('/(admin)/admin-dashboard')}]}
-        style={{ backgroundColor: getBackgroundColor('/(admin)/admin-dashboard')}}
-        onPress={()=> router.push("/(admin)/admin-dashboard")}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/admin-dashboard')}]}
+        style={{ backgroundColor: getBackgroundColor('/admin-dashboard')}}
+        onPress={()=> router.push("/admin-dashboard")}
     />
 
     <DrawerItem
@@ -163,6 +163,14 @@ export default function DrawerLayout() {
           name="(mycomplaint)" // This is the name of the page and must match the url from root
           options={{
             title: 'My Complaint',
+          }}
+        />
+
+        {/* admin section */}
+        <Drawer.Screen
+          name="(admin)/admin-dashboard" // This is the name of the page and must match the url from root
+          options={{
+            title: 'Admin Dashboad',
           }}
         />
 
