@@ -95,6 +95,19 @@ const CustomDrawerContent = (props: any) => {
         onPress={()=> router.push("/(mycomplaint)")}
     />
 
+    {/* Admin drawer list */}
+    <DrawerItem
+        icon={({ color, size, focused})=>(
+          <MaterialCommunityIcons name="human-greeting-variant" 
+                size={24} 
+                color={getIconColor('/(admin)/admin-dashboard')} />
+        )}
+        label={"Dashboard"}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/(admin)/admin-dashboard')}]}
+        style={{ backgroundColor: getBackgroundColor('/(admin)/admin-dashboard')}}
+        onPress={()=> router.push("/(admin)/admin-dashboard")}
+    />
+
     <DrawerItem
         icon={({ color, size, focused})=>(
           <MaterialIcons name="app-settings-alt" 
