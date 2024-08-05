@@ -12,11 +12,11 @@ const AdminDashboard = () => {
                 <TextUi center className=" text-2xl font-bold">Welcome Admin</TextUi>
                 </View>
                 <View className='bg-white min-h-full rounded-t-3xl p-7 pt-10'>
-                <TextUi className="mb-5">Enter your complaint here</TextUi>
+                {/* <TextUi className="mb-5">Enter your complaint here</TextUi> */}
 
 
 
-                <ScrollView className='bg-red-500 flex-1 px-1 pt-2'>
+                <ScrollView className='flex-1 px-1 pt-2'>
                     <View className=' flex flex-row gap-5 flex-wrap'>
                         <View className=' bg-blue-500 h-28 w-40 justify-center items-center shadow-lg rounded-md'>
                             <TextUi className=" text-xl">Complaints</TextUi>
