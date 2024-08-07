@@ -9,7 +9,7 @@ import { Bounceable } from 'rn-bounceable';
 const UserCard = () => {
     return (
         <>
-            <ListItem className=' -mb-2' height={90} onPress={() => router.push('/complaint/1')}>
+            <ListItem className=' -mb-2' height={90} onPress={() => router.push('/user/1')}>
               <ListItem.Part middle column containerStyle={[ {}]}>
                 <View className=' flex-row justify-between items-center'>
                     <View>

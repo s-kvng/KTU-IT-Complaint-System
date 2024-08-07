@@ -187,6 +187,13 @@ export default function DrawerLayout() {
           }}
         />
 
+<Drawer.Screen
+          name="(admin)/(users)" // This is the name of the page and must match the url from root
+          options={{
+            title: 'Users',
+          }}
+        />
+
       </Drawer>
        
       
