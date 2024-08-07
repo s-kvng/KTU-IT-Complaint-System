@@ -108,6 +108,19 @@ const CustomDrawerContent = (props: any) => {
         onPress={()=> router.push("/admin-dashboard")}
     />
 
+{/* users data */}
+<DrawerItem
+        icon={({ color, size, focused})=>(
+          <MaterialCommunityIcons name="human-greeting-variant" 
+                size={24} 
+                color={getIconColor('/users')} />
+        )}
+        label={"Users"}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/users')}]}
+        style={{ backgroundColor: getBackgroundColor('/users')}}
+        onPress={()=> router.push("/(users)/users")}
+    />
+
     <DrawerItem
         icon={({ color, size, focused})=>(
           <MaterialIcons name="app-settings-alt" 
