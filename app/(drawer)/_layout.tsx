@@ -121,6 +121,18 @@ const CustomDrawerContent = (props: any) => {
         onPress={()=> router.push("/(users)/users")}
     />
 
+<DrawerItem
+        icon={({ color, size, focused})=>(
+          <MaterialCommunityIcons name="script" 
+                size={24} 
+                color={getIconColor('/complaints')} />
+        )}
+        label={"All Complaints"}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/complaints')}]}
+        style={{ backgroundColor: getBackgroundColor('/complaints')}}
+        onPress={()=> router.push("/(complaints)/complaints")}
+    />
+
     <DrawerItem
         icon={({ color, size, focused})=>(
           <MaterialIcons name="app-settings-alt" 
@@ -187,12 +199,21 @@ export default function DrawerLayout() {
           }}
         />
 
-<Drawer.Screen
+        <Drawer.Screen
           name="(admin)/(users)" // This is the name of the page and must match the url from root
           options={{
             title: 'Users',
           }}
         />
+
+<Drawer.Screen
+          name="(admin)/(complaints)" // This is the name of the page and must match the url from root
+          options={{
+            title: 'All Complaints',
+          }}
+        />
+
+
 
       </Drawer>
        
