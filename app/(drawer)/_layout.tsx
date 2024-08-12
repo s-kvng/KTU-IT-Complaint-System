@@ -87,12 +87,50 @@ const CustomDrawerContent = (props: any) => {
         icon={({ color, size, focused})=>(
           <MaterialCommunityIcons name="human-greeting-variant" 
                 size={24} 
-                color={getIconColor('/profile')} />
+                color={getIconColor('/')} />
         )}
-        label={"Profile"}
-        labelStyle={[styles.navItemLabel, {color : getLabelColor('/profile')}]}
-        style={{ backgroundColor: getBackgroundColor('/profile')}}
-        onPress={()=> router.push("/(drawer)/profile")}
+        label={"My Compliant"}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/')}]}
+        style={{ backgroundColor: getBackgroundColor('/')}}
+        onPress={()=> router.push("/(mycomplaint)")}
+    />
+
+    {/* Admin drawer list */}
+    <DrawerItem
+        icon={({ color, size, focused})=>(
+          <MaterialCommunityIcons name="human-greeting-variant" 
+                size={24} 
+                color={getIconColor('/admin-dashboard')} />
+        )}
+        label={"Dashboard"}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/admin-dashboard')}]}
+        style={{ backgroundColor: getBackgroundColor('/admin-dashboard')}}
+        onPress={()=> router.push("/admin-dashboard")}
+    />
+
+{/* users data */}
+<DrawerItem
+        icon={({ color, size, focused})=>(
+          <MaterialCommunityIcons name="human-greeting-variant" 
+                size={24} 
+                color={getIconColor('/users')} />
+        )}
+        label={"Users"}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/users')}]}
+        style={{ backgroundColor: getBackgroundColor('/users')}}
+        onPress={()=> router.push("/(users)/users")}
+    />
+
+<DrawerItem
+        icon={({ color, size, focused})=>(
+          <MaterialCommunityIcons name="script" 
+                size={24} 
+                color={getIconColor('/complaints')} />
+        )}
+        label={"All Complaints"}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/complaints')}]}
+        style={{ backgroundColor: getBackgroundColor('/complaints')}}
+        onPress={()=> router.push("/(complaints)/complaints")}
     />
 
     <DrawerItem
@@ -138,6 +176,44 @@ export default function DrawerLayout() {
             title: 'Dashboard',
           }}
         />
+
+        <Drawer.Screen
+          name="complaint" // This is the name of the page and must match the url from root
+          options={{
+            title: 'Add complaint',
+          }}
+        />
+
+        <Drawer.Screen
+          name="(mycomplaint)" // This is the name of the page and must match the url from root
+          options={{
+            title: 'My Complaint',
+          }}
+        />
+
+        {/* admin section */}
+        <Drawer.Screen
+          name="(admin)/admin-dashboard" // This is the name of the page and must match the url from root
+          options={{
+            title: 'Admin Dashboad',
+          }}
+        />
+
+        <Drawer.Screen
+          name="(admin)/(users)" // This is the name of the page and must match the url from root
+          options={{
+            title: 'Users',
+          }}
+        />
+
+<Drawer.Screen
+          name="(admin)/(complaints)" // This is the name of the page and must match the url from root
+          options={{
+            title: 'All Complaints',
+          }}
+        />
+
+
 
       </Drawer>
        
