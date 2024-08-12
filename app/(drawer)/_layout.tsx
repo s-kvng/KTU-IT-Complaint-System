@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { View as UiView , Avatar, Text as UiText  } from 'react-native-ui-lib';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
@@ -24,6 +24,7 @@ const example =
 const CustomDrawerContent = (props: any) => {
   const path = usePathname();
   const colorScheme = useColorScheme();
+  const [ label , setLabel ] = useState();
 
   useEffect(()=>{
     console.log(path)
@@ -58,80 +59,108 @@ const CustomDrawerContent = (props: any) => {
         <UiText marginT-7 className=" text-black dark:text-gray-400">@user1</UiText>
       </UiView>
 
-    <DrawerItem
-        icon={({ color, size, focused})=>(
-          <MaterialCommunityIcons name="human-greeting-variant" 
+    {
+      label === "normal" && 
+      <>
+          <DrawerItem
+          icon={({ color, size, focused})=>(
+            <MaterialCommunityIcons name="human-greeting-variant" 
+                  size={24} 
+                  color={getIconColor('/dashboard')} />
+          )}
+          label={"Dashboard"}
+          labelStyle={[styles.navItemLabel, {color : getLabelColor('/dashboard')}]}
+          style={{ backgroundColor: getBackgroundColor('/dashboard')}}
+          onPress={()=> router.push("/dashboard")}
+      />
+
+
+      <DrawerItem
+          icon={({ color, size, focused})=>(
+            <MaterialIcons name="app-settings-alt" 
                 size={24} 
-                color={getIconColor('/dashboard')} />
-        )}
-        label={"Dashboard"}
-        labelStyle={[styles.navItemLabel, {color : getLabelColor('/dashboard')}]}
-        style={{ backgroundColor: getBackgroundColor('/dashboard')}}
-        onPress={()=> router.push("/dashboard")}
-    />
-
-
-    <DrawerItem
-        icon={({ color, size, focused})=>(
-          <MaterialIcons name="app-settings-alt" 
-              size={24} 
-              color={getIconColor('/complaint')} />
-        )}
-        label={"Add Complaint"}
-        labelStyle={[styles.navItemLabel, {color : getLabelColor('/complaint')} ]}
-        style={{ backgroundColor: getBackgroundColor('/complaint')}}
-        onPress={()=> router.push("/complaint")}
-      />  
+                color={getIconColor('/complaint')} />
+          )}
+          label={"Add Complaint"}
+          labelStyle={[styles.navItemLabel, {color : getLabelColor('/complaint')} ]}
+          style={{ backgroundColor: getBackgroundColor('/complaint')}}
+          onPress={()=> router.push("/complaint")}
+        />  
     
-    <DrawerItem
+        <DrawerItem
+            icon={({ color, size, focused})=>(
+              <MaterialCommunityIcons name="human-greeting-variant" 
+                    size={24} 
+                    color={getIconColor('/')} />
+            )}
+            label={"My Compliant"}
+            labelStyle={[styles.navItemLabel, {color : getLabelColor('/')}]}
+            style={{ backgroundColor: getBackgroundColor('/')}}
+            onPress={()=> router.push("/(mycomplaint)")}
+        />
+      </>
+    }
+
+   
+   {
+    label === "admin" &&
+    <>
+        {/* Admin drawer list */}
+      <DrawerItem
+          icon={({ color, size, focused})=>(
+            <MaterialCommunityIcons name="human-greeting-variant" 
+                  size={24} 
+                  color={getIconColor('/admin-dashboard')} />
+          )}
+          label={"Dashboard"}
+          labelStyle={[styles.navItemLabel, {color : getLabelColor('/admin-dashboard')}]}
+          style={{ backgroundColor: getBackgroundColor('/admin-dashboard')}}
+          onPress={()=> router.push("/admin-dashboard")}
+      />
+
+  {/* users data */}
+        <DrawerItem
+          icon={({ color, size, focused})=>(
+            <MaterialCommunityIcons name="human-greeting-variant" 
+                  size={24} 
+                  color={getIconColor('/users')} />
+          )}
+          label={"Users"}
+          labelStyle={[styles.navItemLabel, {color : getLabelColor('/users')}]}
+          style={{ backgroundColor: getBackgroundColor('/users')}}
+          onPress={()=> router.push("/(users)/users")}
+      />
+
+        <DrawerItem
+          icon={({ color, size, focused})=>(
+            <MaterialCommunityIcons name="script" 
+                  size={24} 
+                  color={getIconColor('/complaints')} />
+          )}
+          label={"All Complaints"}
+          labelStyle={[styles.navItemLabel, {color : getLabelColor('/complaints')}]}
+          style={{ backgroundColor: getBackgroundColor('/complaints')}}
+          onPress={()=> router.push("/(complaints)/complaints")}
+      />
+    </>
+   }
+
+    
+
+        {/* Engineer Drawer list */}
+        <DrawerItem
         icon={({ color, size, focused})=>(
           <MaterialCommunityIcons name="human-greeting-variant" 
                 size={24} 
-                color={getIconColor('/')} />
+                color={getIconColor('/engineer-dashboard')} />
         )}
-        label={"My Compliant"}
-        labelStyle={[styles.navItemLabel, {color : getLabelColor('/')}]}
-        style={{ backgroundColor: getBackgroundColor('/')}}
-        onPress={()=> router.push("/(mycomplaint)")}
+        label={"Engineer Dashboard"}
+        labelStyle={[styles.navItemLabel, {color : getLabelColor('/engineer-dashboard')}]}
+        style={{ backgroundColor: getBackgroundColor('/engineer-dashboard')}}
+        onPress={()=> router.push("/engineer-dashboard")}
     />
 
-    {/* Admin drawer list */}
-    <DrawerItem
-        icon={({ color, size, focused})=>(
-          <MaterialCommunityIcons name="human-greeting-variant" 
-                size={24} 
-                color={getIconColor('/admin-dashboard')} />
-        )}
-        label={"Dashboard"}
-        labelStyle={[styles.navItemLabel, {color : getLabelColor('/admin-dashboard')}]}
-        style={{ backgroundColor: getBackgroundColor('/admin-dashboard')}}
-        onPress={()=> router.push("/admin-dashboard")}
-    />
 
-{/* users data */}
-<DrawerItem
-        icon={({ color, size, focused})=>(
-          <MaterialCommunityIcons name="human-greeting-variant" 
-                size={24} 
-                color={getIconColor('/users')} />
-        )}
-        label={"Users"}
-        labelStyle={[styles.navItemLabel, {color : getLabelColor('/users')}]}
-        style={{ backgroundColor: getBackgroundColor('/users')}}
-        onPress={()=> router.push("/(users)/users")}
-    />
-
-<DrawerItem
-        icon={({ color, size, focused})=>(
-          <MaterialCommunityIcons name="script" 
-                size={24} 
-                color={getIconColor('/complaints')} />
-        )}
-        label={"All Complaints"}
-        labelStyle={[styles.navItemLabel, {color : getLabelColor('/complaints')}]}
-        style={{ backgroundColor: getBackgroundColor('/complaints')}}
-        onPress={()=> router.push("/(complaints)/complaints")}
-    />
 
     <DrawerItem
         icon={({ color, size, focused})=>(
