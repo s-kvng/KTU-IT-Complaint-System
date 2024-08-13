@@ -6,8 +6,10 @@ const EngineersLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="messages" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="complaint-detail/[id]" options={{headerTitle: 'Complaint Details',
-      presentation: "modal"}}/> */}
+      <Stack.Screen
+        name="message-detail/[id]"
+        options={{ headerTitle: "Complaint Details", presentation: "modal" }}
+      />
     </Stack>
   );
 };

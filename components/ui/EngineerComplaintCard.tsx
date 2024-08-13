@@ -9,7 +9,7 @@ import { Bounceable } from "rn-bounceable";
 const EngineerComplaintCard = () => {
   return (
     <>
-      <ListItem height={90} onPress={() => router.push("/complaint-detail/1")}>
+      <ListItem height={90} onPress={() => router.push("/message-detail/1")}>
         <ListItem.Part middle column containerStyle={[{}]}>
           <View className=" flex-row justify-between items-center mb-3">
             <View>
@@ -29,7 +29,7 @@ const EngineerComplaintCard = () => {
                   size={"xSmall"}
                   enableShadow
                   backgroundColor="#D9D9D9"
-                  onPress={() => router.navigate("/(drawer)/dashboard")}
+                  onPress={() => router.navigate("/message-detail/1")}
                 >
                   <TextUi
                     center
