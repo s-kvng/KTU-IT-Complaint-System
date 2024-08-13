@@ -203,6 +203,23 @@ const CustomDrawerContent = (props: any) => {
             }}
             onPress={() => router.push("/engineer-dashboard")}
           />
+
+          <DrawerItem
+            icon={({ color, size, focused }) => (
+              <MaterialCommunityIcons
+                name="script"
+                size={24}
+                color={getIconColor("/messages")}
+              />
+            )}
+            label={"Assigned Complaints"}
+            labelStyle={[
+              styles.navItemLabel,
+              { color: getLabelColor("/messages") },
+            ]}
+            style={{ backgroundColor: getBackgroundColor("/messages") }}
+            onPress={() => router.push("/(messages)/messages")}
+          />
         </>
       )}
 
@@ -293,6 +310,13 @@ export default function DrawerLayout() {
         name="(engineer)/engineer-dashboard" // This is the name of the page and must match the url from root
         options={{
           title: "Engineer Dashboad",
+        }}
+      />
+
+      <Drawer.Screen
+        name="(engineer)/(messages)" // This is the name of the page and must match the url from root
+        options={{
+          title: "Assigned Complaints",
         }}
       />
     </Drawer>
