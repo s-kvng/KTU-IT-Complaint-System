@@ -18,7 +18,7 @@ const App = () => {
         style={styles.linearGradient}
         className="min-h-full justify-start items-center"
       >
-        <ScrollView className="bg-red-500" style={{ height: "100%" }}>
+        <ScrollView className="" style={{ height: "100%" }}>
           <Image
             source={images.computerFull}
             className="w-full max-w-[300px] "
@@ -29,7 +29,7 @@ const App = () => {
               Koforidua Technical University I.T Complaint System KTU-ICS
             </Text>
           </View>
-          <View className=" absolute bottom-20 ">
+          <View className="mt-20 px-8 ">
             <Bounceable>
               <Button
                 enableShadow
