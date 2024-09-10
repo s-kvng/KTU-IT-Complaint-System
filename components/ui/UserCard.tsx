@@ -12,7 +12,7 @@ const UserCard = ({ user }) => {
       <ListItem
         className=" -mb-2"
         height={90}
-        onPress={() => router.push("/user/1")}
+        onPress={() => router.push(`/user/${user.$id}`)}
       >
         <ListItem.Part middle column containerStyle={[{}]}>
           <View className=" flex-row justify-between items-center">
@@ -31,7 +31,7 @@ const UserCard = ({ user }) => {
                   size={"xSmall"}
                   enableShadow
                   backgroundColor="#CDDAE1"
-                  onPress={() => router.navigate("/(drawer)/dashboard")}
+                  onPress={() => router.navigate(`/user/${user.$id}`)}
                 >
                   <TextUi
                     center
