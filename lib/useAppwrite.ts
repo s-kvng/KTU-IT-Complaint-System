@@ -10,9 +10,11 @@ const useAppwrite = (fn) => {
     setIsLoading(true);
     try {
       const response = await fn();
+      console.log("response : ", response);
       setData(response);
     } catch (error) {
-      Alert.alert("Error");
+      console.log(error);
+      Alert.alert("Error, fetching data");
     } finally {
       setIsLoading(false);
     }
