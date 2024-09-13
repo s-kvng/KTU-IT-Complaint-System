@@ -34,7 +34,7 @@ const AddComplaint = () => {
     setUploading(true);
     // Add Complaint to appwrite
     try {
-      await addComplaint({ ...form, userId: "66d5b3f30026788e2412" });
+      await addComplaint({ ...form, userId: "66e3f5e1003c329ffd57" });
 
       Alert.alert("Success", "Post Uploaded successfully");
     } catch (error: any) {
