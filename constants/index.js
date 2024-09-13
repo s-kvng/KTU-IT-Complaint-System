@@ -1,4 +1,4 @@
 import images from "./images";
-import { longOptions } from "./pickerLongOptions";
+import { longOptions, jobType } from "./pickerLongOptions";
 
-export { images, longOptions };
+export { images, longOptions, jobType };
