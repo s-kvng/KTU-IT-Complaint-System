@@ -1,40 +1,74 @@
-import React from 'react';
-import { StyleSheet, View , Text} from 'react-native';
-import { Text as TextUi } from 'react-native-ui-lib';
-import { useLocalSearchParams } from 'expo-router';
-import LinearGradientWrapper from '@/components/shared/LinearGradientWrapper';
-
+import { useState, useEffect } from "react";
+import { StyleSheet, View, Text, Alert } from "react-native";
+import { Text as TextUi } from "react-native-ui-lib";
+import { useLocalSearchParams } from "expo-router";
+import LinearGradientWrapper from "@/components/shared/LinearGradientWrapper";
+import { getComplaint } from "@/lib/appwrite";
+import { ActivityIndicator } from "react-native-paper";
 
 const ComplaintDetail = () => {
-    const { id }  = useLocalSearchParams();
-    return (
-        <LinearGradientWrapper>
-     
-        <View style={{ height: "100%"}}>
-          <View className=' my-20'>
-            <TextUi center className=" text-2xl font-bold">My Complaint</TextUi>
-          </View>
-            <View className='bg-white min-h-full rounded-t-3xl p-10'>
-                <TextUi className="mb-5 text-2xl font-bold text-sky-900">Enter your complaint here {id}</TextUi>
-                <TextUi className=" text-sm text-gray-500 mb-8">Date</TextUi>
+  const { id } = useLocalSearchParams();
+  const [engineer, setEngineer] = useState("");
+  const [fetchLoading, setFetchLoading] = useState(false);
+  const [complaint, setcomplaint] = useState(null);
 
-                <View className=' mb-8'>
-                    <TextUi className=" text-lg">Lorem ipsum dolor sit amet, 
-                        consectetur adipiscing elit. Sed vel velit non odio 
-                        pulvinar bibendum. Donec at ipsum velit. Nulla facilisi. 
-                        In hac habitasse platea dictumst.</TextUi>
-                </View>
+  useEffect(() => {
+    setFetchLoading(true);
+    const fetchRequest = async () => {
+      try {
+        const complain = await getComplaint(id);
+        console.log("complain -> ", complain);
+        setcomplaint(complain);
+      } catch (error) {
+        console.log(error);
+        Alert.alert("Error fetching complaint");
+      } finally {
+        setFetchLoading(false);
+      }
+    };
 
-                <View className=''>
-                    <TextUi className=" text-sm text-gray-500 mb-3">Ref No. - INT001</TextUi>
-                    <TextUi className="text-lg text-blue-900">Resolved</TextUi>
-                </View>
-            </View>
+    fetchRequest();
+  }, [id]);
+  return (
+    <LinearGradientWrapper>
+      <View style={{ height: "100%" }}>
+        <View className=" my-20">
+          <TextUi center className=" text-2xl font-bold">
+            My Complaint
+          </TextUi>
         </View>
-        </LinearGradientWrapper>
-    );
-}
+        <View className="bg-white min-h-full rounded-t-3xl p-10">
+          {fetchLoading || !complaint ? (
+            <View style={{ height: "100%", justifyContent: "center" }}>
+              <ActivityIndicator size="large" color="#0B4479" />
+            </View>
+          ) : (
+            <>
+              {/* <TextUi className="mb-5 text-2xl font-bold text-sky-900">Enter your complaint here {id}</TextUi> */}
+              <TextUi className=" text-sm text-gray-500 mb-8">
+                {complaint?.$createdAt}
+              </TextUi>
 
-const styles = StyleSheet.create({})
+              <View className=" mb-8">
+                <TextUi className=" text-lg">{complaint?.description}</TextUi>
+              </View>
+
+              <View className="">
+                <TextUi className=" text-sm text-gray-500 mb-3">
+                  Ref No. - {complaint?.$id}
+                </TextUi>
+                <TextUi className="text-lg text-blue-900">
+                  {complaint.status}
+                </TextUi>
+              </View>
+            </>
+          )}
+        </View>
+      </View>
+    </LinearGradientWrapper>
+  );
+};
+
+const styles = StyleSheet.create({});
 
 export default ComplaintDetail;
