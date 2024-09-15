@@ -44,7 +44,15 @@ const ComplaintDetail = () => {
             </View>
           ) : (
             <>
-              {/* <TextUi className="mb-5 text-2xl font-bold text-sky-900">Enter your complaint here {id}</TextUi> */}
+              <TextUi className="mb-5 text-2xl font-bold text-sky-900">
+                Complainer - {complaint?.complainer?.firstname}{" "}
+                {complaint?.complainer?.lastname}
+              </TextUi>
+              <View className=" mb-2">
+                <TextUi className=" text-sm text-gray-700">
+                  Job Type - {complaint?.job_type}
+                </TextUi>
+              </View>
               <TextUi className=" text-sm text-gray-500 mb-8">
                 {complaint?.$createdAt}
               </TextUi>
@@ -58,7 +66,7 @@ const ComplaintDetail = () => {
                   Ref No. - {complaint?.$id}
                 </TextUi>
                 <TextUi className="text-lg text-blue-900">
-                  {complaint.status}
+                  Status - {complaint.status}
                 </TextUi>
               </View>
             </>
