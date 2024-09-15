@@ -9,6 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 
 import { useColorScheme } from "@/components/useColorScheme";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const example = {
   title: "Image with fade in animation",
@@ -21,9 +22,10 @@ const example = {
 };
 
 const CustomDrawerContent = (props: any) => {
+  const { user } = useGlobalContext();
   const path = usePathname();
   const colorScheme = useColorScheme();
-  const [label, setLabel] = useState("admin");
+  const [label, setLabel] = useState(user.role);
 
   useEffect(() => {
     console.log(path);
@@ -69,11 +71,11 @@ const CustomDrawerContent = (props: any) => {
       >
         <Avatar {...example} onPress={() => console.log("avatar")} />
         <UiText marginT-7 className=" text-black dark:text-gray-400">
-          @user1
+          @{user.firstname}
         </UiText>
       </UiView>
 
-      {label === "normal" && (
+      {label === "Staff" && (
         <>
           <DrawerItem
             icon={({ color, size, focused }) => (
@@ -125,7 +127,7 @@ const CustomDrawerContent = (props: any) => {
         </>
       )}
 
-      {label === "admin" && (
+      {label === "Director" && (
         <>
           {/* Admin drawer list */}
           <DrawerItem
@@ -182,7 +184,7 @@ const CustomDrawerContent = (props: any) => {
         </>
       )}
 
-      {label === "engineer" && (
+      {label === "Engineer" && (
         <>
           {/* Engineer Drawer list */}
           <DrawerItem
