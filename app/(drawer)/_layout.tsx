@@ -23,7 +23,7 @@ const example = {
 const CustomDrawerContent = (props: any) => {
   const path = usePathname();
   const colorScheme = useColorScheme();
-  const [label, setLabel] = useState("normal");
+  const [label, setLabel] = useState("engineer");
 
   useEffect(() => {
     console.log(path);
