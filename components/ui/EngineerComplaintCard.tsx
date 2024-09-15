@@ -6,19 +6,25 @@ import { Divider } from "react-native-paper";
 import { Button, ListItem, Text as TextUi } from "react-native-ui-lib";
 import { Bounceable } from "rn-bounceable";
 
-const EngineerComplaintCard = () => {
+const EngineerComplaintCard = ({ complaint }) => {
   return (
     <>
-      <ListItem height={90} onPress={() => router.push("/message-detail/1")}>
+      <ListItem
+        height={90}
+        onPress={() => router.push(`/message-detail/${complaint.$id}`)}
+      >
         <ListItem.Part middle column containerStyle={[{}]}>
           <View className=" flex-row justify-between items-center mb-3">
             <View>
               <ListItem.Part containerStyle={{ marginBottom: 3 }}>
-                <TextUi text60 numberOfLines={1}>{`User ${1}`}</TextUi>
+                <TextUi
+                  text60
+                  numberOfLines={1}
+                >{`${complaint?.complainer.firstname} ${complaint?.complainer.lastname}`}</TextUi>
               </ListItem.Part>
               <ListItem.Part>
                 <TextUi text70 numberOfLines={1}>
-                  Member
+                  {complaint?.status}
                 </TextUi>
               </ListItem.Part>
             </View>
@@ -29,7 +35,9 @@ const EngineerComplaintCard = () => {
                   size={"xSmall"}
                   enableShadow
                   backgroundColor="#D9D9D9"
-                  onPress={() => router.navigate("/message-detail/1")}
+                  onPress={() =>
+                    router.navigate(`/message-detail/${complaint.$id}`)
+                  }
                 >
                   <TextUi
                     center
@@ -45,10 +53,7 @@ const EngineerComplaintCard = () => {
 
           <ListItem.Part>
             <TextUi text70 numberOfLines={2}>
-              Since: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Cum nulla temporibus hic perspiciatis aperiam cumque, quos
-              delectus eum unde sapiente, placeat dignissimos obcaecati rem!
-              Quae alias dolor quibusdam hic perferendis?
+              {complaint?.description}
             </TextUi>
           </ListItem.Part>
         </ListItem.Part>
