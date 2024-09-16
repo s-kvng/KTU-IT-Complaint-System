@@ -8,8 +8,10 @@ import { Bounceable } from "rn-bounceable";
 import { router } from "expo-router";
 import ComplaintCard from "@/components/ui/ComplaintCard";
 import { getStaffComplaints } from "@/lib/appwrite";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const index = () => {
+  const { user } = useGlobalContext();
   const [fetchLoading, setFetchLoading] = useState(false);
   const [complaints, setcomplaints] = useState(null);
 
@@ -17,7 +19,7 @@ const index = () => {
     setFetchLoading(true);
     const fetchRequest = async () => {
       try {
-        const complains = await getStaffComplaints("66d5b3f30026788e2412");
+        const complains = await getStaffComplaints(user?.$id);
         console.log("complains -> ", complains);
         setcomplaints(complains);
       } catch (error) {
@@ -41,6 +43,14 @@ const index = () => {
         </View>
         <View className="bg-white min-h-full rounded-t-3xl p-10">
           <ScrollView className=" flex-1 px-3 pt-2">
+            {complaints?.filter((complaint) => complaint.assigned !== true)
+              ?.length === 0 && (
+              <View className=" flex-1 bg-red">
+                <TextUi className="mb-2 text-[#0B4479] text-lg font-semibold">
+                  No Pending Complaints
+                </TextUi>
+              </View>
+            )}
             {fetchLoading || !complaints ? (
               <View style={{ height: "100%", justifyContent: "center" }}>
                 <ActivityIndicator size="large" color="#0B4479" />

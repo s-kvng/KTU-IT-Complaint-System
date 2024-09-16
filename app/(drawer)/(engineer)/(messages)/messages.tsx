@@ -8,8 +8,10 @@ import { Bounceable } from "rn-bounceable";
 import { router } from "expo-router";
 import EngineerComplaintCard from "@/components/ui/EngineerComplaintCard";
 import { getAssignedToComplaints } from "@/lib/appwrite";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const index = () => {
+  const { user } = useGlobalContext();
   const [fetchLoading, setFetchLoading] = useState(false);
   const [complaints, setcomplaints] = useState(null);
 
@@ -17,7 +19,7 @@ const index = () => {
     setFetchLoading(true);
     const fetchRequest = async () => {
       try {
-        const complains = await getAssignedToComplaints("66d5b4c500271f29c803");
+        const complains = await getAssignedToComplaints(user?.$id);
         console.log("complains -> ", complains);
         setcomplaints(complains);
       } catch (error) {
@@ -29,7 +31,7 @@ const index = () => {
     };
 
     fetchRequest();
-  }, []);
+  }, [user]);
 
   return (
     <LinearGradientWrapper>

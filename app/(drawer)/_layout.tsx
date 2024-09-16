@@ -10,6 +10,7 @@ import { StyleSheet } from "react-native";
 
 import { useColorScheme } from "@/components/useColorScheme";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import { signOut } from "@/lib/appwrite";
 
 const example = {
   title: "Image with fade in animation",
@@ -22,14 +23,24 @@ const example = {
 };
 
 const CustomDrawerContent = (props: any) => {
-  const { user } = useGlobalContext();
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
   const path = usePathname();
   const colorScheme = useColorScheme();
-  const [label, setLabel] = useState(user.role);
+  const [label, setLabel] = useState(user?.role);
 
   useEffect(() => {
     console.log(path);
   }, [path]);
+
+  // function to logout
+  const logout = async () => {
+    console.log("Logging out...");
+    await signOut();
+    setUser(null);
+    setIsLoggedIn(false);
+
+    router.replace("/sign-in");
+  };
 
   const getBackgroundColor = (targetPath: string) => {
     if (path === targetPath) {
@@ -71,7 +82,7 @@ const CustomDrawerContent = (props: any) => {
       >
         <Avatar {...example} onPress={() => console.log("avatar")} />
         <UiText marginT-7 className=" text-black dark:text-gray-400">
-          @{user.firstname}
+          @{user?.firstname}
         </UiText>
       </UiView>
 
@@ -253,7 +264,7 @@ const CustomDrawerContent = (props: any) => {
         label={"Logout"}
         labelStyle={[styles.navItemLabel, { color: getLabelColor("/logout") }]}
         style={{ position: "absolute", bottom: 40, left: 0, right: 0 }}
-        onPress={() => router.push("/sign-in")}
+        onPress={logout}
       />
     </DrawerContentScrollView>
   );
