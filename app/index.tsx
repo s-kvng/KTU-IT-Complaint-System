@@ -1,14 +1,19 @@
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { images } from "../constants";
 import { Button } from "react-native-ui-lib";
 import { Bounceable } from "rn-bounceable";
 import { AntDesign } from "@expo/vector-icons";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const App = () => {
   console.log("app screen");
+  const { isLoading, isLoggedIn } = useGlobalContext();
+  console.log(" -> ", isLoading, " ", isLoggedIn);
+
+  if (!isLoading && isLoggedIn) return <Redirect href="/(drawer)" />;
   return (
     <SafeAreaView className="h-full">
       <LinearGradient

@@ -15,8 +15,10 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 import { Bounceable } from "rn-bounceable";
 import { router } from "expo-router";
 import { addComplaint } from "@/lib/appwrite";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const AddComplaint = () => {
+  const { user } = useGlobalContext();
   const [uploading, setUploading] = useState<boolean>(false);
   const [form, setForm] = useState({
     phone: "",
@@ -34,7 +36,7 @@ const AddComplaint = () => {
     setUploading(true);
     // Add Complaint to appwrite
     try {
-      await addComplaint({ ...form, userId: "66e3f5e1003c329ffd57" });
+      await addComplaint({ ...form, userId: user?.$id });
 
       Alert.alert("Success", "Post Uploaded successfully");
     } catch (error: any) {

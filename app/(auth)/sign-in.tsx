@@ -12,33 +12,41 @@ import { images } from "@/constants";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Bounceable } from "rn-bounceable";
-import { TextInput } from "react-native-paper";
+import { ActivityIndicator, TextInput } from "react-native-paper";
 import { router } from "expo-router";
 
 import { getCurrentUser, signIn } from "@/lib/appwrite";
+import { useGlobalContext } from "@/context/GlobalProvider";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { setUser, setIsLoggedIn } = useGlobalContext();
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const onSubmit = async () => {
-    if (!email || !password) {
+    if (!form.email || !form.password) {
       return Alert.alert("Error", "Please fill in all required fields !!!");
     }
+    setError("");
     setIsSubmitting(true);
     try {
-      await signIn(email, password);
+      await signIn(form.email, form.password);
       const result = await getCurrentUser();
 
       // set to global state
-      //   setUser(result)
-      //   setIsLoggedIn(true)
+      setUser(result);
+      setIsLoggedIn(true);
 
       Alert.alert("Success", "User signed in successfully");
-      router.replace("/home");
+      router.replace("/(drawer)/dashboard");
     } catch (error: any) {
+      setError(error.message);
       throw new Error(error.message);
     } finally {
       setIsSubmitting(false);
@@ -58,31 +66,46 @@ const SignIn = () => {
           <TextUi className="font-bold text-2xl" color="#0B4479">
             Login
           </TextUi>
-          <View className="w-full px-10 gap-y-5">
-            <TextInput
-              className="bg-transparent "
-              textColor="black"
-              placeholderTextColor="#000"
-              mode="outlined"
-              label="Email"
-              value={email}
-              onChangeText={(email) => setEmail(email)}
-            />
-            <TextInput
-              className="bg-transparent"
-              textColor="#000"
-              mode="outlined"
-              label="Password"
-              value={password}
-              onChangeText={(password) => setPassword(password)}
-            />
-          </View>
+          {isSubmitting ? (
+            <View style={{ height: "100%", justifyContent: "center" }}>
+              <ActivityIndicator size="large" color="#0B4479" />
+            </View>
+          ) : (
+            <View className="w-full px-10 gap-y-5">
+              {error && (
+                <TextUi color="red" className="text-sm mb-2">
+                  {error}
+                </TextUi>
+              )}
+              <TextInput
+                className="bg-transparent "
+                textColor="black"
+                placeholderTextColor="#000"
+                mode="outlined"
+                label="Email"
+                value={form.email}
+                onChangeText={(email) => setForm({ ...form, email: email })}
+              />
+              <TextInput
+                className="bg-transparent"
+                textColor="#000"
+                mode="outlined"
+                label="Password"
+                value={form.password}
+                onChangeText={(password) =>
+                  setForm({ ...form, password: password })
+                }
+              />
+            </View>
+          )}
+
           <View className="">
             <Bounceable>
               <Button
                 enableShadow
+                disabled={isSubmitting}
                 backgroundColor="#D9D9D9"
-                onPress={() => router.navigate("/(drawer)/dashboard")}
+                onPress={onSubmit}
               >
                 <Text className=" mr-5 text-[#0B4479] font-semibold text-lg">
                   Login
