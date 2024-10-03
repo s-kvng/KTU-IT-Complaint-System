@@ -11,6 +11,7 @@ import { StyleSheet } from "react-native";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { signOut } from "@/lib/appwrite";
+import React from "react";
 
 const example = {
   title: "Image with fade in animation",
@@ -241,16 +242,13 @@ const CustomDrawerContent = (props: any) => {
           <MaterialIcons
             name="app-settings-alt"
             size={24}
-            color={getIconColor("/settings")}
+            color={getIconColor("/profile")}
           />
         )}
-        label={"Settings"}
-        labelStyle={[
-          styles.navItemLabel,
-          { color: getLabelColor("/settings") },
-        ]}
-        style={{ backgroundColor: getBackgroundColor("/settings") }}
-        onPress={() => router.push("/(drawer)/(tabs)/(settings)")}
+        label={"Profile"}
+        labelStyle={[styles.navItemLabel, { color: getLabelColor("/profile") }]}
+        style={{ backgroundColor: getBackgroundColor("/profile") }}
+        onPress={() => router.push("/profile")}
       />
 
       <DrawerItem

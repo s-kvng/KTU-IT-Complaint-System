@@ -95,6 +95,7 @@ const SignIn = () => {
                 onChangeText={(password) =>
                   setForm({ ...form, password: password })
                 }
+                secureTextEntry
               />
             </View>
           )}
