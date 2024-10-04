@@ -37,7 +37,6 @@ const Engineer = () => {
                 <TextUi className="font-semibold text-lg">12</TextUi>
               </View>
             </View>
-            <TextUi>down</TextUi>
           </ScrollView>
         </View>
       </View>
